@@ -2,97 +2,157 @@ export const mockData = {
   "pipelineSegment": [
     {
       "id": 1,
-      "segment_code": "segment code 1",
-      "district": "district 1",
-      "material": "material 1",
-      "diameter": "diameter 1",
-      "install_year": "install year 1",
-      "pressure_zone": "pressure zone 1",
+      "segment_code": "SEG-001",
+      "district": "城东",
+      "material": "球墨铸铁",
+      "diameter": "DN300",
+      "install_year": "1998",
+      "pressure_zone": "PZ-1",
       "risk_level": "LOW"
     },
     {
       "id": 2,
-      "segment_code": "segment code 2",
-      "district": "district 2",
-      "material": "material 2",
-      "diameter": "diameter 2",
-      "install_year": "install year 2",
-      "pressure_zone": "pressure zone 2",
+      "segment_code": "SEG-002",
+      "district": "城西",
+      "material": "钢管",
+      "diameter": "DN500",
+      "install_year": "2005",
+      "pressure_zone": "PZ-2",
       "risk_level": "MEDIUM"
     },
     {
       "id": 3,
-      "segment_code": "segment code 3",
-      "district": "district 3",
-      "material": "material 3",
-      "diameter": "diameter 3",
-      "install_year": "install year 3",
-      "pressure_zone": "pressure zone 3",
+      "segment_code": "SEG-003",
+      "district": "江北",
+      "material": "PE",
+      "diameter": "DN200",
+      "install_year": "2012",
+      "pressure_zone": "PZ-1",
       "risk_level": "HIGH"
+    },
+    {
+      "id": 4,
+      "segment_code": "SEG-004",
+      "district": "江南",
+      "material": "铸铁",
+      "diameter": "DN400",
+      "install_year": "1986",
+      "pressure_zone": "PZ-3",
+      "risk_level": "EXTREME"
+    },
+    {
+      "id": 5,
+      "segment_code": "SEG-005",
+      "district": "高新",
+      "material": "钢管",
+      "diameter": "DN600",
+      "install_year": "2016",
+      "pressure_zone": "PZ-2",
+      "risk_level": "MEDIUM"
     }
   ],
   "inspectionPoint": [
     {
       "id": 1,
       "pipeline_segment_id": 1,
-      "point_code": "point code 1",
-      "point_type": "MINOR",
-      "address_desc": "address desc 1",
-      "check_frequency": "check frequency 1",
-      "last_checked_at": "2026-06-11T09:00:00Z",
-      "status": "ASSIGNED"
+      "point_code": "PT-1001",
+      "point_type": "阀门井",
+      "address_desc": "城东路 12 号",
+      "check_frequency": "30",
+      "last_checked_at": "2026-09-10T08:00:00Z",
+      "status": "ENABLED"
     },
     {
       "id": 2,
       "pipeline_segment_id": 2,
-      "point_code": "point code 2",
-      "point_type": "MAJOR",
-      "address_desc": "address desc 2",
-      "check_frequency": "check frequency 2",
-      "last_checked_at": "2026-06-12T09:00:00Z",
-      "status": "WORKING"
+      "point_code": "PT-1002",
+      "point_type": "流量计",
+      "address_desc": "城西大道 88 号",
+      "check_frequency": "14",
+      "last_checked_at": "2026-09-12T08:00:00Z",
+      "status": "ENABLED"
     },
     {
       "id": 3,
       "pipeline_segment_id": 3,
-      "point_code": "point code 3",
-      "point_type": "BURST",
-      "address_desc": "address desc 3",
-      "check_frequency": "check frequency 3",
-      "last_checked_at": "2026-06-13T09:00:00Z",
-      "status": "WAIT_ASSIGN"
+      "point_code": "PT-1003",
+      "point_type": "消火栓",
+      "address_desc": "江北街 5 号",
+      "check_frequency": "7",
+      "last_checked_at": "2026-09-15T08:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 4,
+      "pipeline_segment_id": 3,
+      "point_code": "PT-1004",
+      "point_type": "排气阀",
+      "address_desc": "江北街 9 号",
+      "check_frequency": "7",
+      "last_checked_at": "2026-09-01T08:00:00Z",
+      "status": "DISABLED"
+    },
+    {
+      "id": 5,
+      "pipeline_segment_id": 4,
+      "point_code": "PT-1005",
+      "point_type": "阀门井",
+      "address_desc": "江南路 30 号",
+      "check_frequency": "3",
+      "last_checked_at": "2026-09-20T08:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 6,
+      "pipeline_segment_id": 5,
+      "point_code": "PT-1006",
+      "point_type": "流量计",
+      "address_desc": "高新大道 101 号",
+      "check_frequency": "14",
+      "last_checked_at": "2026-09-18T08:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 7,
+      "pipeline_segment_id": 5,
+      "point_code": "PT-1007",
+      "point_type": "听漏点",
+      "address_desc": "高新大道 150 号",
+      "check_frequency": "14",
+      "last_checked_at": "2026-09-19T08:00:00Z",
+      "status": "ENABLED"
     }
   ],
   "leakReport": [
     {
       "id": 1,
-      "reporter_type": "MINOR",
-      "point_id": 1,
-      "leak_level": "LOW",
-      "description": "description 1",
-      "reported_at": "2026-06-11T09:00:00Z",
-      "verify_status": "ASSIGNED",
-      "photo_url": "/mock/photo_url-1.png"
+      "reporter_type": "RESIDENT",
+      "point_id": 2,
+      "leak_level": "MINOR",
+      "description": "城西大道井盖渗水",
+      "reported_at": "2026-09-13T10:00:00Z",
+      "verify_status": "PENDING",
+      "photo_url": "/mock/leak-1.png"
     },
     {
       "id": 2,
-      "reporter_type": "MAJOR",
-      "point_id": 2,
-      "leak_level": "MEDIUM",
-      "description": "description 2",
-      "reported_at": "2026-06-12T09:00:00Z",
-      "verify_status": "WORKING",
-      "photo_url": "/mock/photo_url-2.png"
+      "reporter_type": "INSPECTOR",
+      "point_id": 3,
+      "leak_level": "MAJOR",
+      "description": "江北街管段接口渗漏",
+      "reported_at": "2026-09-16T09:30:00Z",
+      "verify_status": "CONFIRMED",
+      "photo_url": "/mock/leak-2.png"
     },
     {
       "id": 3,
-      "reporter_type": "BURST",
-      "point_id": 3,
-      "leak_level": "HIGH",
-      "description": "description 3",
-      "reported_at": "2026-06-13T09:00:00Z",
-      "verify_status": "WAIT_ASSIGN",
-      "photo_url": "/mock/photo_url-3.png"
+      "reporter_type": "RESIDENT",
+      "point_id": 6,
+      "leak_level": "BURST",
+      "description": "高新大道疑似爆管",
+      "reported_at": "2026-09-21T07:45:00Z",
+      "verify_status": "PENDING",
+      "photo_url": "/mock/leak-3.png"
     }
   ],
   "repairOrder": [

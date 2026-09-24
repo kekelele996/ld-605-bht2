@@ -1,1 +1,1 @@
-package com.generated.waterLeak.constants; public final class ErrorMessages { public static final String AUTH_REQUIRED="missing token"; public static final String RBAC_DENIED="role denied"; }
+package com.generated.waterLeak.constants; public final class ErrorMessages { public static final String AUTH_REQUIRED="missing token"; public static final String RBAC_DENIED="role denied"; public static final String VALIDATION_FAILED="请求参数缺失或格式错误"; public static final String SEGMENT_NOT_FOUND="管网分段不存在"; public static final String RISK_DOWNGRADE_BLOCKED="该管段存在待核实漏损报告，风险等级不允许下调"; }

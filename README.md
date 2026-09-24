@@ -57,6 +57,28 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 - LeakLevel: constants/LeakLevel、types/LeakLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - RepairStatus: constants/RepairStatus、types/RepairStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - RiskLevel: constants/RiskLevel、types/RiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- VerifyStatus（漏损核实状态 PENDING/CONFIRMED/DISMISSED）: backend `constants/VerifyStatus.java`、frontend `constants/VerifyStatus.ts`，被 PipelineSegmentService 与 mocks/riskScheduleMock 引用。
+- PointStatus（巡检点启停 ENABLED/DISABLED）: backend `constants/PointStatus.java`、frontend `constants/PointStatus.ts`，决定哪些点位参与周期重算。
+
+## 风险等级与巡检周期联动
+
+管网页（`/pipelines`）保存管段风险后，巡检周期立即联动，起点取各启用点位最近一次检查时间：
+
+| 风险等级 | 巡检周期 |
+|---|---|
+| LOW 低 | 30 天 |
+| MEDIUM 中 | 14 天 |
+| HIGH 高 | 7 天 |
+| EXTREME 极高 | 3 天 |
+
+规则与实现位置：
+
+- 周期常量：后端 `constants/RiskLevel.java`（`frequencyDays`），前端 `constants/RiskLevel.ts`（`RISK_FREQUENCY_DAYS`）。
+- 接口：`POST /api/pipeline-segment/risk`，请求体 `{segmentId, riskLevel}`，响应 `{segment, points[]}`，其中 `points` 列出各启用点位的新到期日（`nextDueAt = lastCheckedAt + 周期`）。
+- 业务约束：管段下任一巡检点存在待核实（PENDING）漏损报告时，风险不允许下调，后端返回 409 + `RISK_DOWNGRADE_BLOCKED`；前端保留原风险与原周期（store 仅在保存成功后更新，下拉框回退到原风险）。
+- 停用（DISABLED）点位不参与周期重算；保存成功后页面列出各启用点位的新到期日。
+- 后端不可达时，前端 `mocks/riskScheduleMock.ts` 在本地种子数据上复刻同一套规则，保证离线行为一致。
+- 相关错误码：`RISK_DOWNGRADE_BLOCKED`、`SEGMENT_NOT_FOUND`（前后端 `errorCodes`/`errorMessages` 均有定义）。
 
 ## 为什么会牵一发动全身
 

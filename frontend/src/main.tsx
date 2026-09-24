@@ -4,6 +4,11 @@ import { routes } from "./router/routes";
 import { mockData } from "./mocks/seedData";
 import { StatusBadge } from "./components/common/StatusBadge";
 import { StatCard } from "./components/common/StatCard";
+import { DashboardPage } from "./pages/DashboardPage";
+import { PipelinesPage } from "./pages/PipelinesPage";
+import { InspectionsPage } from "./pages/InspectionsPage";
+import { LeaksPage } from "./pages/LeaksPage";
+import { RepairsPage } from "./pages/RepairsPage";
 import "./styles.css";
 
 function Page({ name }: { name: string }) {
@@ -39,15 +44,24 @@ function Page({ name }: { name: string }) {
   </main>;
 }
 
+const pageComponents: Record<string, React.ComponentType> = {
+  "/dashboard": DashboardPage,
+  "/pipelines": PipelinesPage,
+  "/inspections": InspectionsPage,
+  "/leaks": LeaksPage,
+  "/repairs": RepairsPage
+};
+
 function App() {
   const [active, setActive] = useState<string>(routes[0]?.route ?? "/dashboard");
   const current = routes.find((route) => route.route === active) ?? routes[0];
+  const CurrentPage = pageComponents[current?.route ?? ""] ?? (() => <Page name={current?.name ?? "工作台"} />);
   return <div className="shell">
     <aside>
       <div className="brand">城市水务漏损巡检平台</div>
       <nav>{routes.map((route) => <button key={route.route} className={active === route.route ? "active" : ""} onClick={() => setActive(route.route)}>{route.name}</button>)}</nav>
     </aside>
-    <Page name={current?.name ?? "工作台"} />
+    <CurrentPage />
   </div>;
 }
 
