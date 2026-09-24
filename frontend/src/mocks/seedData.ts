@@ -2,97 +2,148 @@ export const mockData = {
   "pipelineSegment": [
     {
       "id": 1,
-      "segment_code": "segment code 1",
-      "district": "district 1",
-      "material": "material 1",
-      "diameter": "diameter 1",
-      "install_year": "install year 1",
-      "pressure_zone": "pressure zone 1",
-      "risk_level": "LOW"
+      "segment_code": "PN-2026-001",
+      "district": "江岸区",
+      "material": "球墨铸铁",
+      "diameter": "DN300",
+      "install_year": "2014",
+      "pressure_zone": "中压区",
+      "risk_level": "LOW",
+      "enabled_point_count": 2
     },
     {
       "id": 2,
-      "segment_code": "segment code 2",
-      "district": "district 2",
-      "material": "material 2",
-      "diameter": "diameter 2",
-      "install_year": "install year 2",
-      "pressure_zone": "pressure zone 2",
-      "risk_level": "MEDIUM"
+      "segment_code": "PN-2026-002",
+      "district": "江汉区",
+      "material": "钢管",
+      "diameter": "DN500",
+      "install_year": "2009",
+      "pressure_zone": "高压区",
+      "risk_level": "MEDIUM",
+      "enabled_point_count": 1
     },
     {
       "id": 3,
-      "segment_code": "segment code 3",
-      "district": "district 3",
-      "material": "material 3",
-      "diameter": "diameter 3",
-      "install_year": "install year 3",
-      "pressure_zone": "pressure zone 3",
-      "risk_level": "HIGH"
+      "segment_code": "PN-2026-003",
+      "district": "硚口区",
+      "material": "PE 管",
+      "diameter": "DN200",
+      "install_year": "2018",
+      "pressure_zone": "中压区",
+      "risk_level": "HIGH",
+      "enabled_point_count": 2
+    },
+    {
+      "id": 4,
+      "segment_code": "PN-2026-004",
+      "district": "汉阳区",
+      "material": "灰口铸铁",
+      "diameter": "DN400",
+      "install_year": "2001",
+      "pressure_zone": "低压区",
+      "risk_level": "HIGH",
+      "enabled_point_count": 1
     }
   ],
   "inspectionPoint": [
     {
       "id": 1,
       "pipeline_segment_id": 1,
-      "point_code": "point code 1",
-      "point_type": "MINOR",
-      "address_desc": "address desc 1",
-      "check_frequency": "check frequency 1",
-      "last_checked_at": "2026-06-11T09:00:00Z",
-      "status": "ASSIGNED"
+      "point_code": "PT-001-01",
+      "point_type": "闸阀井",
+      "address_desc": "江岸区沿江大道 12 号",
+      "check_frequency": 30,
+      "last_checked_at": "2026-09-01T09:00:00Z",
+      "next_due_at": "2026-10-01T00:00:00Z",
+      "status": "ENABLED"
     },
     {
       "id": 2,
-      "pipeline_segment_id": 2,
-      "point_code": "point code 2",
-      "point_type": "MAJOR",
-      "address_desc": "address desc 2",
-      "check_frequency": "check frequency 2",
-      "last_checked_at": "2026-06-12T09:00:00Z",
-      "status": "WORKING"
+      "pipeline_segment_id": 1,
+      "point_code": "PT-001-02",
+      "point_type": "消火栓",
+      "address_desc": "江岸区卢沟桥路 5 号",
+      "check_frequency": 30,
+      "last_checked_at": "2026-08-20T14:00:00Z",
+      "next_due_at": "2026-09-19T00:00:00Z",
+      "status": "ENABLED"
     },
     {
       "id": 3,
+      "pipeline_segment_id": 2,
+      "point_code": "PT-002-01",
+      "point_type": "排气阀",
+      "address_desc": "江汉区中山大道 88 号",
+      "check_frequency": 14,
+      "last_checked_at": "2026-09-10T08:30:00Z",
+      "next_due_at": "2026-09-24T00:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 4,
       "pipeline_segment_id": 3,
-      "point_code": "point code 3",
-      "point_type": "BURST",
-      "address_desc": "address desc 3",
-      "check_frequency": "check frequency 3",
-      "last_checked_at": "2026-06-13T09:00:00Z",
-      "status": "WAIT_ASSIGN"
+      "point_code": "PT-003-01",
+      "point_type": "调压箱",
+      "address_desc": "硚口区解放大道 200 号",
+      "check_frequency": 7,
+      "last_checked_at": "2026-09-21T10:00:00Z",
+      "next_due_at": "2026-09-28T00:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 5,
+      "pipeline_segment_id": 3,
+      "point_code": "PT-003-02",
+      "point_type": "流量计",
+      "address_desc": "硚口区古田二路 17 号",
+      "check_frequency": 7,
+      "last_checked_at": "2026-09-19T16:45:00Z",
+      "next_due_at": "2026-09-26T00:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 6,
+      "pipeline_segment_id": 4,
+      "point_code": "PT-004-01",
+      "point_type": "检查井",
+      "address_desc": "汉阳区琴台大道 66 号",
+      "check_frequency": 7,
+      "last_checked_at": "2026-09-18T11:20:00Z",
+      "next_due_at": "2026-09-25T00:00:00Z",
+      "status": "ENABLED"
+    },
+    {
+      "id": 7,
+      "pipeline_segment_id": 4,
+      "point_code": "PT-004-02",
+      "point_type": "废弃水尺",
+      "address_desc": "汉阳区龙灯堤（围挡内）",
+      "check_frequency": 7,
+      "last_checked_at": "2026-08-01T09:00:00Z",
+      "next_due_at": "2026-08-08T00:00:00Z",
+      "status": "DISABLED"
     }
   ],
   "leakReport": [
     {
       "id": 1,
-      "reporter_type": "MINOR",
-      "point_id": 1,
-      "leak_level": "LOW",
-      "description": "description 1",
-      "reported_at": "2026-06-11T09:00:00Z",
-      "verify_status": "ASSIGNED",
-      "photo_url": "/mock/photo_url-1.png"
+      "reporter_type": "RESIDENT",
+      "point_id": 4,
+      "leak_level": "MAJOR",
+      "description": "调压箱周边路面持续渗水",
+      "reported_at": "2026-09-22T07:40:00Z",
+      "verify_status": "PENDING_VERIFY",
+      "photo_url": "/mock/leak-1.png"
     },
     {
       "id": 2,
-      "reporter_type": "MAJOR",
-      "point_id": 2,
-      "leak_level": "MEDIUM",
-      "description": "description 2",
-      "reported_at": "2026-06-12T09:00:00Z",
-      "verify_status": "WORKING",
-      "photo_url": "/mock/photo_url-2.png"
-    },
-    {
-      "id": 3,
-      "reporter_type": "BURST",
-      "point_id": 3,
-      "leak_level": "HIGH",
-      "description": "description 3",
-      "reported_at": "2026-06-13T09:00:00Z",
-      "verify_status": "WAIT_ASSIGN",
-      "photo_url": "/mock/photo_url-3.png"
+      "reporter_type": "INSPECTOR",
+      "point_id": 6,
+      "leak_level": "MINOR",
+      "description": "井盖边缘轻微返潮",
+      "reported_at": "2026-09-10T15:00:00Z",
+      "verify_status": "VERIFIED",
+      "photo_url": "/mock/leak-2.png"
     }
   ],
   "repairOrder": [

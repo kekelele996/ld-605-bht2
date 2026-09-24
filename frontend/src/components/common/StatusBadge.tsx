@@ -1,3 +1,6 @@
-export function StatusBadge({ value }: { value: string }) {
-  return <span className={"badge " + String(value).toLowerCase().replace(/_/g, "-")}>{String(value).replace(/_/g, " ")}</span>;
+export function StatusBadge({ value, label }: { value: string; label?: string }) {
+  const className = "badge " + String(value).toLowerCase().replace(/_/g, "-");
+  return (
+    <span className={className}>{label ?? String(value).replace(/_/g, " ")}</span>
+  );
 }

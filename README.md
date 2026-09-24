@@ -57,6 +57,25 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 - LeakLevel: constants/LeakLevel、types/LeakLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - RepairStatus: constants/RepairStatus、types/RepairStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - RiskLevel: constants/RiskLevel、types/RiskLevel、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+  - 后端：`constants/RiskLevel.java`（含 `getCycleDays()` 周期映射与 `isLowerThan` 下调判定）、`constants/PointStatus.java`（点位启停）、`constants/VerifyStatus.java`（待核实判定）、`constants/ErrorCodes.java`、`constants/ErrorMessages.java`、`constants/LogTemplates.java`、`utils/InspectionScheduleCalculator.java`、`services/PipelineSegmentService.java`、`controllers/PipelineSegmentController.java`。
+  - 前端：`constants/RiskLevel.ts` 与 `types/RiskLevel.ts`（均含 `RISK_CYCLE_DAYS`/`RiskLevelText`）、`constants/errorCodes.ts`、`constants/errorMessages.ts`、`constants/logTemplates.ts`、`utils/formatters.ts`、`api/PipelineSegment.ts`、`stores/PipelineSegmentStore.ts`、`pages/PipelinesPage.tsx`、`components/common/ScheduleResultPanel.tsx`、`components/common/RiskBadge.tsx`。
+
+## 风险调整与巡检周期联动
+
+班组长在「管网资产」页调整并保存管段风险时，风险与巡检周期在后端同一次请求内联动：
+
+| 风险等级 | 巡检周期 |
+|---|---|
+| 低风险 LOW | 30 天 |
+| 中风险 MEDIUM | 14 天 |
+| 高风险 HIGH | 7 天 |
+| 极高风险 EXTREME | 3 天 |
+
+- 起点取该点位**最近一次检查时间** `last_checked_at`，新到期日 `next_due_at = last_checked_at + 周期`；仅 `ENABLED`（启用）点位参与重排，停用点位周期与到期日不变，也不出现在清单中。
+- 管段存在 **待核实（PENDING_VERIFY）漏损** 时，风险**不允许下降**：后端返回 `409 RISK_DOWNGRADE_BLOCKED`，**原风险与原巡检周期全部保留**；风险上调或无待核实漏损时正常保存。
+- 保存接口：`PUT /api/pipeline-segment/risk`，请求体 `{id, risk_level}`，成功响应含新风险、新周期及各启用点位的新到期日清单（`enabledPoints`）；前端保存成功后在页面下方列出各启用点位的新到期日，后端拒绝时本地不清空、保留原风险与原周期并提示原因。
+- 校验类拒绝：风险值非法返回 `400 INVALID_RISK_LEVEL`，管段不存在返回 `404 SEGMENT_NOT_FOUND`。
+
 
 ## 为什么会牵一发动全身
 

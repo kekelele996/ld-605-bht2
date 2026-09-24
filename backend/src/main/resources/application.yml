@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: water-leak
+  # 当前数据访问层为内存种子仓储（与 database/init.sql 结构对齐），
+  # 未接入 DataSource，显式关闭数据源/JPA 自动装配，保证无数据库环境也可启动评审。
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+      - org.springframework.boot.autoconfigure.orm.jpa.JpaRepositoriesAutoConfiguration
